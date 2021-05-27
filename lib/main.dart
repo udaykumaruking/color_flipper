@@ -8,11 +8,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Color Flipper',
+      home: MyHomePage(title: 'Color Flipper'),
     );
   }
 }
@@ -38,13 +35,32 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          children: [
+            Container(
+              width: 550,
+              padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+              decoration: BoxDecoration(
+                  color: Colors.black, borderRadius: BorderRadius.circular(5)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    // 'Background Color: $_counter',
+                    'Background Color: #000000',
+                    style: TextStyle(color: Colors.white, fontSize: 40),
+                    // style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              // 'Background Color: $_counter',
+              'Background Color: #000000',
+              style: TextStyle(color: Colors.black, fontSize: 40),
+              // style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
