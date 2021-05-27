@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,12 +24,40 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+String randomizer() {
+  int _r = Random().nextInt(256);
+  int _g = Random().nextInt(256);
+  int _b = Random().nextInt(256);
 
+  generator(int a, int b, int c) {
+    String a1 = (a ~/ 16).toRadixString(16);
+    String a2 = (a % 16).toRadixString(16);
+    String b1 = (b ~/ 16).toRadixString(16);
+    String b2 = (b % 16).toRadixString(16);
+    String c1 = (c ~/ 16).toRadixString(16);
+    String c2 = (c % 16).toRadixString(16);
+    return a1 + a2 + b1 + b2 + c1 + c2;
+  }
+
+  return generator(_r, _g, _b);
+}
+
+String finalColor = 'ffffff';
+int forrbg(finalColor) {
+  String forBg = '0xff' + finalColor;
+  return int.parse(forBg);
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    super.initState();
+    randomizer();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(forrbg(finalColor)),
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -45,23 +74,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    // 'Background Color: $_counter',
-                    'Background Color: #000000',
+                    'Background Color: ',
                     style: TextStyle(color: Colors.white, fontSize: 40),
-                    // style: Theme.of(context).textTheme.headline4,
+                  ),
+                  Text(
+                    '$finalColor',
+                    style: TextStyle(color: Colors.white, fontSize: 40),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 30,
             ),
-            Text(
-              // 'Background Color: $_counter',
-              'Background Color: #000000',
-              style: TextStyle(color: Colors.black, fontSize: 40),
-              // style: Theme.of(context).textTheme.headline4,
-            ),
+            ElevatedButton(
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.all(5),
+                ),
+                onPressed: () => {
+                      setState(() {
+                        finalColor = randomizer();
+                        forrbg(finalColor);
+                      })
+                    },
+                child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Randomize',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ))
           ],
         ),
       ),
